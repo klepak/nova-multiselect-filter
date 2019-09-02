@@ -12,6 +12,10 @@
         "php": ">=7.1.0",
         "laravel/framework": "5.8.*",
         "laravel/nova": "~2.0"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
