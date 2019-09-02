@@ -9,6 +9,11 @@
                 :close-on-select="false"
                 :clear-on-select="false"
                 :multiple="true"
+                :placeholder="placeholder"
+                :show-labels="showLabels"
+                :select-label="selectLabel"
+                :selected-label="selectedLabel"
+                :deselect-label="deselectLabel"
                 label="name"
                 track-by="value"
                 @input="handleChange"
@@ -77,6 +82,26 @@
                 });
 
                 return values;
+            },
+
+            placeholder: function () {
+                return this.filter.placeholder || this.__('Select option');
+            },
+
+            showLabels: function () {
+                return this.filter.showLabels || true;
+            },
+
+            selectLabel: function () {
+                return this.filter.selectLabel || this.__('Press enter to select');
+            },
+
+            selectedLabel: function () {
+                return this.filter.selectedLabel || this.__('Selected');
+            },
+
+            deselectLabel: function () {
+                return this.filter.deselectLabel || this.__('Press enter to remove');
             },
         },
     };

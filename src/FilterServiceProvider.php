@@ -16,6 +16,7 @@ class FilterServiceProvider extends ServiceProvider
     {
         Nova::serving(static function () {
             Nova::script('nova-multiselect-filter', __DIR__ . '/../dist/js/filter.js');
+            Nova::translations(__DIR__ . '/../resources/lang/de/filter.json');
         });
     }
 }
