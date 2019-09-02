@@ -89,7 +89,7 @@
             },
 
             showLabels: function () {
-                return this.filter.showLabels || true;
+                return this.filter.showLabels !== undefined ? this.filter.showLabels : true;
             },
 
             selectLabel: function () {
