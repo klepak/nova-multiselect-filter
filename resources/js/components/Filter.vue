@@ -17,7 +17,9 @@
                 label="name"
                 track-by="value"
                 @input="handleChange"
-            ></multiselect>
+            >
+                <template v-slot:noOptions>{{ noOptionsLabel }}</template>
+            </multiselect>
         </div>
     </div>
 </template>
@@ -102,6 +104,10 @@
 
             deselectLabel: function () {
                 return this.filter.deselectLabel || this.__('Press enter to remove');
+            },
+
+            noOptionsLabel: function () {
+                return this.filter.noOptionsLabel || this.__('List is empty.');
             },
         },
     };

@@ -37,4 +37,9 @@ abstract class NovaMultiselectFilter extends Filter
     {
         return $this->withMeta([__FUNCTION__ => $deselectLabel]);
     }
+
+    public function noOptionsLabel(string $noOptionsLabel): self
+    {
+        return $this->withMeta([__FUNCTION__ => $noOptionsLabel]);
+    }
 }
