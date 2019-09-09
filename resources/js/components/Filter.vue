@@ -6,14 +6,14 @@
             <multiselect
                 v-model="options"
                 :options="this.filter.options"
-                :close-on-select="false"
-                :clear-on-select="false"
+                :clear-on-select="clearOnSelect"
+                :close-on-select="closeOnSelect"
+                :deselect-label="deselectLabel"
                 :multiple="true"
                 :placeholder="placeholder"
-                :show-labels="showLabels"
                 :select-label="selectLabel"
                 :selected-label="selectedLabel"
-                :deselect-label="deselectLabel"
+                :show-labels="showLabels"
                 label="name"
                 track-by="value"
                 @input="handleChange"
@@ -86,12 +86,24 @@
                 return values.length ? values : '';
             },
 
-            placeholder: function () {
-                return this.filter.placeholder || this.__('Select option');
+            clearOnSelect: function () {
+                return this.filter.clearOnSelect !== undefined ? this.filter.clearOnSelect : true;
             },
 
-            showLabels: function () {
-                return this.filter.showLabels !== undefined ? this.filter.showLabels : true;
+            closeOnSelect: function () {
+                return this.filter.closeOnSelect !== undefined ? this.filter.closeOnSelect : true;
+            },
+
+            deselectLabel: function () {
+                return this.filter.deselectLabel || this.__('Press enter to remove');
+            },
+
+            noOptionsLabel: function () {
+                return this.filter.noOptionsLabel || this.__('List is empty.');
+            },
+
+            placeholder: function () {
+                return this.filter.placeholder || this.__('Select option');
             },
 
             selectLabel: function () {
@@ -102,12 +114,8 @@
                 return this.filter.selectedLabel || this.__('Selected');
             },
 
-            deselectLabel: function () {
-                return this.filter.deselectLabel || this.__('Press enter to remove');
-            },
-
-            noOptionsLabel: function () {
-                return this.filter.noOptionsLabel || this.__('List is empty.');
+            showLabels: function () {
+                return this.filter.showLabels !== undefined ? this.filter.showLabels : true;
             },
         },
     };

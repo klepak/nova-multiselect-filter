@@ -2,6 +2,8 @@
 
 namespace Klepak\NovaMultiselectFilter;
 
+use InvalidArgumentException;
+use Klepak\NovaMultiselectFilter\Enums\Configuration;
 use Laravel\Nova\Filters\Filter;
 
 abstract class NovaMultiselectFilter extends Filter
@@ -13,33 +15,23 @@ abstract class NovaMultiselectFilter extends Filter
      */
     public $component = 'nova-multiselect-filter';
 
-    public function placeholder(string $placeholder): self
+    public function __construct(array $configuration = [])
     {
-        return $this->withMeta([__FUNCTION__ => $placeholder]);
+        $this->configure($configuration);
     }
 
-    public function showLabels(bool $showLabels): self
+    protected function configure(array $configuration): void
     {
-        return $this->withMeta([__FUNCTION__ => $showLabels]);
-    }
+        if (empty($configuration)) {
+            return;
+        }
 
-    public function selectLabel(string $selectLabel): self
-    {
-        return $this->withMeta([__FUNCTION__ => $selectLabel]);
-    }
+        foreach ($configuration as $property => $value) {
+            if (!in_array($property, Configuration::values(), true)) {
+                throw new InvalidArgumentException('Invalid configuration property: ' . $property);
+            }
 
-    public function selectedLabel(string $selectedLabel): self
-    {
-        return $this->withMeta([__FUNCTION__ => $selectedLabel]);
-    }
-
-    public function deselectLabel(string $deselectLabel): self
-    {
-        return $this->withMeta([__FUNCTION__ => $deselectLabel]);
-    }
-
-    public function noOptionsLabel(string $noOptionsLabel): self
-    {
-        return $this->withMeta([__FUNCTION__ => $noOptionsLabel]);
+            $this->withMeta([$property => $value]);
+        }
     }
 }
