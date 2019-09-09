@@ -83,7 +83,7 @@
                     values.push(option.value);
                 });
 
-                return values;
+                return values.length ? values : '';
             },
 
             placeholder: function () {
