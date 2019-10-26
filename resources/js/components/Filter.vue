@@ -19,6 +19,7 @@
                 @input="handleChange"
             >
                 <template v-slot:noOptions>{{ noOptionsLabel }}</template>
+                <template v-slot:noResult>{{ noResultLabel }}</template>
             </multiselect>
         </div>
     </div>
@@ -100,6 +101,10 @@
 
             noOptionsLabel: function () {
                 return this.filter.noOptionsLabel || this.__('List is empty.');
+            },
+
+            noResultLabel: function () {
+                return this.filter.noResultLabel || this.__('No elements found. Consider changing the search query.');
             },
 
             placeholder: function () {

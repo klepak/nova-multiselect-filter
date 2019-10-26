@@ -1,7 +1,8 @@
 {
-  "Select option": "Auswählen",
-  "Press enter to select": "Enter drücken, um auszuwählen",
-  "Selected": "Ausgewählt",
-  "Press enter to remove": "Enter drücken, um zu entfernen",
-  "List is empty.": "Keine Einträge gefunden"
+    "Select option": "Auswählen",
+    "Press enter to select": "Enter drücken, um auszuwählen",
+    "Selected": "Ausgewählt",
+    "Press enter to remove": "Enter drücken, um zu entfernen",
+    "List is empty.": "Keine Einträge gefunden",
+    "No elements found. Consider changing the search query.": "Keine Einträge gefunden"
 }
