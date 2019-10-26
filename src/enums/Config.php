@@ -2,7 +2,7 @@
 
 namespace Klepak\NovaMultiselectFilter\Enums;
 
-class Configuration
+class Config
 {
     public const CLEAR_ON_SELECT = 'clearOnSelect';
     public const CLOSE_ON_SELECT = 'closeOnSelect';
@@ -17,7 +17,7 @@ class Configuration
     /**
      * @return string[]
      */
-    public static function values(): array
+    public static function getProperties(): array
     {
         return [
             self::CLEAR_ON_SELECT,

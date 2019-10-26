@@ -3,7 +3,7 @@
 namespace Klepak\NovaMultiselectFilter;
 
 use InvalidArgumentException;
-use Klepak\NovaMultiselectFilter\Enums\Configuration;
+use Klepak\NovaMultiselectFilter\Enums\Config;
 use Laravel\Nova\Filters\Filter;
 
 abstract class NovaMultiselectFilter extends Filter
@@ -27,8 +27,8 @@ abstract class NovaMultiselectFilter extends Filter
         }
 
         foreach ($configuration as $property => $value) {
-            if (!in_array($property, Configuration::values(), true)) {
-                throw new InvalidArgumentException('Invalid configuration property: ' . $property);
+            if (!in_array($property, Config::getProperties(), true)) {
+                throw new InvalidArgumentException('Invalid property: ' . $property);
             }
 
             $this->withMeta([$property => $value]);
