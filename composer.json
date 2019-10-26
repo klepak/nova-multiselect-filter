@@ -8,6 +8,12 @@
         "filter"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "require": {
         "php": "^7.1",
         "laravel/framework": "^5.8 || ^6.0",
