@@ -9,11 +9,10 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=7.1.0",
-        "laravel/framework": "^5.8|6.*",
-        "laravel/nova": "2.*"
-    }
-    ,
+        "php": "^7.1",
+        "laravel/framework": "^5.8 || ^6.0",
+        "laravel/nova": "^2.0"
+    },
     "require-dev": {
         "roave/security-advisories": "dev-master"
     },
