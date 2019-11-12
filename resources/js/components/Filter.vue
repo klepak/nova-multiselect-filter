@@ -9,10 +9,21 @@
                 :close-on-select="false"
                 :clear-on-select="false"
                 :multiple="true"
+                :placeholder="__('Select option')"
+                :selectLabel="__('Press enter to select')"
+                :selectedLabel="__('Selected')"
+                :deselectLabel="__('Press enter to remove')"
                 label="name"
                 track-by="value"
                 @input="handleChange"
-            ></multiselect>
+            >
+
+                <span
+                    slot="noResult"
+                >{{ __('Oops! No elements found. Consider changing the search query.')}}</span>
+
+                <span slot="noOptions">{{ __('List is empty')}}</span>
+            </multiselect>
         </div>
     </div>
 </template>
