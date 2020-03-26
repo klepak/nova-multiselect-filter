@@ -8,10 +8,19 @@
         "filter"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "require": {
-        "php": ">=7.1.0",
-        "laravel/framework": "^5.8|^6.0",
-        "laravel/nova": "~2.0"
+        "php": "^7.1",
+        "laravel/framework": "^5.8 || ^6.0",
+        "laravel/nova": "^2.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
