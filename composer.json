@@ -19,9 +19,6 @@
         "laravel/framework": "^5.8 || ^6.0",
         "laravel/nova": "^2.0"
     },
-    "require-dev": {
-        "roave/security-advisories": "dev-master"
-    },
     "autoload": {
         "psr-4": {
             "Klepak\\NovaMultiselectFilter\\": "src/"
