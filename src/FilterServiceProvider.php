@@ -2,13 +2,16 @@
 
 namespace Klepak\NovaMultiselectFilter;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Nova;
 
 class FilterServiceProvider extends ServiceProvider
 {
     protected const SCRIPT_FILE = __DIR__ . '/../dist/js/filter.js';
-    protected const DE_LANGUAGE_FILE = __DIR__ . '/../resources/lang/de/filter.json';
+    protected static $availableTranslations = [
+        'de'
+    ];
 
     /**
      * Bootstrap any application services.
@@ -19,7 +22,21 @@ class FilterServiceProvider extends ServiceProvider
     {
         Nova::serving(static function () {
             Nova::script('nova-multiselect-filter', self::SCRIPT_FILE);
-            Nova::translations(self::DE_LANGUAGE_FILE);
+
+            $translations = $this->getTranslationsFromAppLocale();
+
+            if(!is_null($translations))
+                Nova::translations($translations);
         });
+    }
+
+    public function getTranslationsFromAppLocale()
+    {
+        $locale = App::getLocale();
+
+        if(in_array($locale, static::$availableTranslations))
+            return __DIR__ . "/../resources/lang/$locale/filter.json";
+
+        return null;
     }
 }

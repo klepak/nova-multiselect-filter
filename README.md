@@ -33,3 +33,8 @@ class CustomFilter extends NovaMultiselectFilter
     }
 }
 ```
+
+# Testing
+```shell script
+composer test
+```
