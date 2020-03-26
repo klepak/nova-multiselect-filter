@@ -23,14 +23,14 @@ class FilterServiceProvider extends ServiceProvider
         Nova::serving(static function () {
             Nova::script('nova-multiselect-filter', self::SCRIPT_FILE);
 
-            $translations = $this->getTranslationsFromAppLocale();
+            $translations = FilterServiceProvider::getTranslationsFromAppLocale();
 
             if(!is_null($translations))
                 Nova::translations($translations);
         });
     }
 
-    public function getTranslationsFromAppLocale()
+    public static function getTranslationsFromAppLocale()
     {
         $locale = App::getLocale();
 
