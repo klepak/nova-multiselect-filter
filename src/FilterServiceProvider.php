@@ -1,33 +1,25 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Klepak\NovaMultiselectFilter;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Nova;
 
 class FilterServiceProvider extends ServiceProvider
 {
+    protected const SCRIPT_FILE = __DIR__ . '/../dist/js/filter.js';
+    protected const DE_LANGUAGE_FILE = __DIR__ . '/../resources/lang/de/filter.json';
+
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Nova::serving(function (ServingNova $event) {
-            Nova::script('nova-multiselect-filter', __DIR__.'/../dist/js/filter.js');
-            Nova::style('nova-multiselect-filter', __DIR__.'/../dist/css/filter.css');
+        Nova::serving(static function () {
+            Nova::script('nova-multiselect-filter', self::SCRIPT_FILE);
+            Nova::translations(self::DE_LANGUAGE_FILE);
         });
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }
