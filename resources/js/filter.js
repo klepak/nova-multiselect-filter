@@ -1,3 +1,5 @@
-Nova.booting((Vue, router, store) => {
-    Vue.component('nova-multiselect-filter', require('./components/Filter'));
+import Filter from './components/Filter'
+
+Nova.booting((app, store) => {
+    app.component('nova-multiselect-filter', Filter);
 });
