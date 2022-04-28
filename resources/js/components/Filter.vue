@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <h3 class="text-sm uppercase tracking-wide text-80 bg-30 p-3">{{ filter.name }}</h3>
+    <FilterContainer>
+        <span>{{ filter.name }}</span>
 
-        <div class="p-2">
-            <multiselect
+        <template #filter>
+            <VueMultiselect
                 v-model="options"
                 :options="this.filter.options"
                 :clear-on-select="clearOnSelect"
@@ -14,22 +14,25 @@
                 :select-label="selectLabel"
                 :selected-label="selectedLabel"
                 :show-labels="showLabels"
-                label="name"
+                :max-height="200"
+                label="label"
                 track-by="value"
-                @input="handleChange"
+                @update:model-value="handleChange"
+                class="nova-multiselect-filter"
             >
                 <template v-slot:noOptions>{{ noOptionsLabel }}</template>
                 <template v-slot:noResult>{{ noResultLabel }}</template>
-            </multiselect>
-        </div>
-    </div>
+            </VueMultiselect>
+        </template>
+    </FilterContainer>
 </template>
 
 <script>
-    import Multiselect from 'vue-multiselect';
+    import VueMultiselect from 'vue-multiselect';
 
     export default {
-        components: {Multiselect},
+        components: {VueMultiselect},
+        emits: ['change'],
         props: {
             resourceName: {
                 type: String,
@@ -39,9 +42,15 @@
                 type: String,
                 required: true,
             },
+            lens: String,
+        },
+
+        created() {
+            this.setCurrentFilterValue()
         },
 
         mounted: function () {
+            Nova.$on('filter-reset', this.setCurrentFilterValue)
             if (this.filter.currentValue === undefined || this.filter.currentValue === '') {
                 return;
             }
@@ -53,6 +62,10 @@
 
                 this.options.push(option);
             });
+        },
+
+        beforeUnmount() {
+            Nova.$off('filter-reset', this.setCurrentFilterValue)
         },
 
         data: function () {
@@ -70,10 +83,13 @@
 
                 this.$emit('change');
             },
+            setCurrentFilterValue() {
+                this.options = this.filter.currentValue
+            },
         },
 
         computed: {
-            filter: function () {
+            filter() {
                 return this.$store.getters[`${this.resourceName}/getFilter`](this.filterKey);
             },
 
@@ -126,4 +142,18 @@
     };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style>
+@import "~vue-multiselect/dist/vue-multiselect.css";
+
+.nova-multiselect-filter .multiselect__content-wrapper {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.nova-multiselect-filter .multiselect__option--highlight::after {
+    position: relative;
+    display: block;
+    padding: 0;
+    line-height: 10px;
+    font-size: 10px;
+}
+</style>
