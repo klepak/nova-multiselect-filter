@@ -1,8 +1,10 @@
 # Installation
 
 ```bash
-composer require klepak/nova-multiselect-filter
+composer require dukstra/nova-multiselect-filter
 ```
+
+This fork targets PHP 8.3+, Laravel 13, and Laravel Nova 5.
 
 # Description
 
@@ -13,17 +15,18 @@ Multiselect filter for Laravel Nova. Based on [vue-multiselect](https://vue-mult
 # Usage
 
 ```php
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Klepak\NovaMultiselectFilter\NovaMultiselectFilter;
 
 class CustomFilter extends NovaMultiselectFilter
 {
-    public function apply(Request $request, $query, $value)
+    public function apply(NovaRequest $request, Builder $query, mixed $value): Builder
     {
         return $query->whereIn('field', $value);
     }
 
-    public function options(Request $request)
+    public function options(NovaRequest $request)
     {
         return [
             'Label 1' => 'value-1',
@@ -33,6 +36,10 @@ class CustomFilter extends NovaMultiselectFilter
     }
 }
 ```
+
+The filter's `apply` method must return an Eloquent builder, as required by
+Nova 5. The `options` method continues to return the label-to-value choices
+used by the multiselect.
 
 # Testing
 ```shell script

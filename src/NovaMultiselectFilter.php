@@ -2,6 +2,8 @@
 
 namespace Klepak\NovaMultiselectFilter;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use InvalidArgumentException;
 use Klepak\NovaMultiselectFilter\Enums\Config;
 use Laravel\Nova\Filters\Filter;
@@ -18,6 +20,18 @@ abstract class NovaMultiselectFilter extends Filter
     public function __construct(array $configuration = [])
     {
         $this->configure($configuration);
+    }
+
+    /**
+     * Apply the filter to the query.
+     *
+     * Nova 5 requires filters to return an Eloquent builder. Keeping that
+     * contract here makes incompatibilities visible when an application filter
+     * is loaded instead of failing later while Nova handles a request.
+     */
+    public function apply(NovaRequest $request, Builder $query, mixed $value): Builder
+    {
+        return $query;
     }
 
     protected function configure(array $configuration): void

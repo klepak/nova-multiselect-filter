@@ -16,7 +16,7 @@
                 :show-labels="showLabels"
                 label="name"
                 track-by="value"
-                @input="handleChange"
+                @update:modelValue="handleChange"
             >
                 <template v-slot:noOptions>{{ noOptionsLabel }}</template>
                 <template v-slot:noResult>{{ noResultLabel }}</template>
@@ -41,18 +41,20 @@
             },
         },
 
-        mounted: function () {
-            if (this.filter.currentValue === undefined || this.filter.currentValue === '') {
-                return;
+        mounted() {
+            let currentValue = this.filter.currentValue;
+
+            if (typeof currentValue === 'string' && currentValue !== '') {
+                try {
+                    currentValue = JSON.parse(currentValue);
+                } catch (error) {
+                    currentValue = [];
+                }
             }
 
-            this.filter.options.forEach(option => {
-                if (this.filter.currentValue.indexOf(option.value) === -1) {
-                    return;
-                }
+            const values = Array.isArray(currentValue) ? currentValue : [];
 
-                this.options.push(option);
-            });
+            this.options = this.filter.options.filter(option => values.includes(option.value));
         },
 
         data: function () {
@@ -62,7 +64,7 @@
         },
 
         methods: {
-            handleChange: function () {
+            handleChange() {
                 this.$store.commit(`${this.resourceName}/updateFilterState`, {
                     filterClass: this.filterKey,
                     value: this.values,
@@ -73,57 +75,53 @@
         },
 
         computed: {
-            filter: function () {
+            filter() {
                 return this.$store.getters[`${this.resourceName}/getFilter`](this.filterKey);
             },
 
-            values: function () {
-                const values = [];
-
-                this.options.forEach(option => {
-                    values.push(option.value);
-                });
+            values() {
+                const values = this.options.map(option => option.value);
 
                 return values.length ? values : '';
             },
 
-            clearOnSelect: function () {
+            clearOnSelect() {
                 return this.filter.clearOnSelect !== undefined ? this.filter.clearOnSelect : true;
             },
 
-            closeOnSelect: function () {
+            closeOnSelect() {
                 return this.filter.closeOnSelect !== undefined ? this.filter.closeOnSelect : true;
             },
 
-            deselectLabel: function () {
+            deselectLabel() {
                 return this.filter.deselectLabel || this.__('Press enter to remove');
             },
 
-            noOptionsLabel: function () {
+            noOptionsLabel() {
                 return this.filter.noOptionsLabel || this.__('List is empty.');
             },
 
-            noResultLabel: function () {
+            noResultLabel() {
                 return this.filter.noResultLabel || this.__('No elements found. Consider changing the search query.');
             },
 
-            placeholder: function () {
+            placeholder() {
                 return this.filter.placeholder || this.__('Select option');
             },
 
-            selectLabel: function () {
+            selectLabel() {
                 return this.filter.selectLabel || this.__('Press enter to select');
             },
 
-            selectedLabel: function () {
+            selectedLabel() {
                 return this.filter.selectedLabel || this.__('Selected');
             },
 
-            showLabels: function () {
+            showLabels() {
                 return this.filter.showLabels !== undefined ? this.filter.showLabels : true;
             },
         },
     };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
