@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Klepak\NovaMultiselectFilter;
+namespace Dukstra\NovaMultiselectFilter;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use InvalidArgumentException;
-use Klepak\NovaMultiselectFilter\Enums\Config;
+use Dukstra\NovaMultiselectFilter\Enums\Config;
 use Laravel\Nova\Filters\Filter;
 
 abstract class NovaMultiselectFilter extends Filter

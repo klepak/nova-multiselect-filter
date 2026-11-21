@@ -1,6 +1,6 @@
 <?php declare (strict_types=1);
 
-namespace Klepak\NovaMultiselectFilter\Enums;
+namespace Dukstra\NovaMultiselectFilter\Enums;
 
 class Config
 {

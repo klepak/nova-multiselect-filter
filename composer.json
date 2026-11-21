@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Klepak\\NovaMultiselectFilter\\": "src/"
+            "Dukstra\\NovaMultiselectFilter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Klepak\\NovaMultiselectFilter\\Tests\\": "tests/"
+            "Dukstra\\NovaMultiselectFilter\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -40,7 +40,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Klepak\\NovaMultiselectFilter\\FilterServiceProvider"
+                "Dukstra\\NovaMultiselectFilter\\FilterServiceProvider"
             ]
         }
     },

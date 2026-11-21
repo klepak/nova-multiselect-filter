@@ -10,14 +10,14 @@ This fork targets PHP 8.3+, Laravel 13, and Laravel Nova 5.
 
 Multiselect filter for Laravel Nova. Based on [vue-multiselect](https://vue-multiselect.js.org)
 
-![example](https://raw.githubusercontent.com/klepak/nova-multiselect-filter/master/docs/example.gif)
+![example](https://raw.githubusercontent.com/dukstra/nova-multiselect-filter/master/docs/example.gif)
 
 # Usage
 
 ```php
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Klepak\NovaMultiselectFilter\NovaMultiselectFilter;
+use Dukstra\NovaMultiselectFilter\NovaMultiselectFilter;
 
 class CustomFilter extends NovaMultiselectFilter
 {

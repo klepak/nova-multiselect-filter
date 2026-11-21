@@ -1,6 +1,6 @@
 <?php
 
-namespace Klepak\NovaMultiselectFilter\Tests;
+namespace Dukstra\NovaMultiselectFilter\Tests;
 
 use Illuminate\Container\Container;
 use Illuminate\Config\Repository;

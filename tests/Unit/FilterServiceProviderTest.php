@@ -1,10 +1,10 @@
 <?php
 
-namespace Klepak\NovaMultiselectFilter\Tests\Unit;
+namespace Dukstra\NovaMultiselectFilter\Tests\Unit;
 
 use Illuminate\Support\Facades\App;
-use Klepak\NovaMultiselectFilter\FilterServiceProvider;
-use Klepak\NovaMultiselectFilter\Tests\TestCase;
+use Dukstra\NovaMultiselectFilter\FilterServiceProvider;
+use Dukstra\NovaMultiselectFilter\Tests\TestCase;
 
 class FilterServiceProviderTest extends TestCase
 {

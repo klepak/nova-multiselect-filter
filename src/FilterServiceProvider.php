@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Klepak\NovaMultiselectFilter;
+namespace Dukstra\NovaMultiselectFilter;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;

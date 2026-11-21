@@ -1,12 +1,12 @@
 <?php
 
-namespace Klepak\NovaMultiselectFilter\Tests\Unit;
+namespace Dukstra\NovaMultiselectFilter\Tests\Unit;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Klepak\NovaMultiselectFilter\NovaMultiselectFilter;
+use Dukstra\NovaMultiselectFilter\NovaMultiselectFilter;
 use Laravel\Nova\Filters\Filter;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Klepak\NovaMultiselectFilter\Tests\TestCase;
+use Dukstra\NovaMultiselectFilter\Tests\TestCase;
 
 class NovaMultiselectFilterTest extends TestCase
 {
