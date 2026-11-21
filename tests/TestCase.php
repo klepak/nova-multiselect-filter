@@ -2,46 +2,37 @@
 
 namespace Klepak\NovaMultiselectFilter\Tests;
 
-use Orchestra\Testbench\TestCase as BaseTestCase;
-use Selby\Integration\PowerOffice\GO\PoGoServiceProvider;
-use Selby\TokenManagement\TokenManagementServiceProvider;
+use Illuminate\Container\Container;
+use Illuminate\Config\Repository;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Translation\ArrayLoader;
+use Illuminate\Translation\Translator;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    /**
-     * Setup the test environment.
-     */
+    protected Application $app;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->app = new Application();
+        $this->app->instance('config', new Repository([
+            'app' => ['locale' => 'en'],
+        ]));
+        $this->app->instance('translator', new Translator(new ArrayLoader(), 'en'));
+        Container::setInstance($this->app);
+        Facade::setFacadeApplication($this->app);
     }
 
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app)
+    protected function tearDown(): void
     {
+        Facade::clearResolvedInstances();
+        Facade::setFacadeApplication(null);
+        Container::setInstance(null);
 
-    }
-
-    /**
-     * Get package providers.  At a minimum this is the package being tested, but also
-     * would include packages upon which our package depends, e.g. Cartalyst/Sentry
-     * In a normal app environment these would be added to the 'providers' array in
-     * the config/app.php file.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
-    protected function getPackageProviders($app)
-    {
-        return [
-
-        ];
+        parent::tearDown();
     }
 }
