@@ -1,3 +1,6 @@
+> **⚠️ This repository is abandoned and no longer maintained.**
+> Please use the fork by dukstra as a replacement: [dukstra/nova-multiselect-filter](https://github.com/dukstra/nova-multiselect-filter)
+
 # Installation
 
 ```bash
